@@ -33,11 +33,25 @@ export default function App() {
 
   const { charOne, charTwo, charThree, charFour } = userInput
 
+  const verifyCode = () => {
+    const submittedPassCode = `${charOne}${charTwo}${charThree}${charFour}`
+    submittedPassCode === passCode ? setVerified(true) : setVerified(false)
+  }
+
+  const handleChange = (e) => {
+    setUserInput({ ...userInput, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    verifyCode()
+  }
+
   return (
     <div className="wrapper">
       <Header />
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <Message status={verified} />
 
         <div>
@@ -46,9 +60,7 @@ export default function App() {
             type="password"
             name="charOne"
             value={charOne}
-            onChange={(e) =>
-              setUserInput({ ...userInput, charOne: e.target.value })
-            }
+            onChange={handleChange}
           />
 
           <input
@@ -57,9 +69,7 @@ export default function App() {
             name="charTwo"
             maxLength="1"
             value={charTwo}
-            onChange={(e) =>
-              setUserInput({ ...userInput, charTwo: e.target.value })
-            }
+            onChange={handleChange}
           />
 
           <input
@@ -68,9 +78,7 @@ export default function App() {
             name="charThree"
             maxLength="1"
             value={charThree}
-            onChange={(e) =>
-              setUserInput({ ...userInput, charThree: e.target.value })
-            }
+            onChange={handleChange}
           />
 
           <input
@@ -79,9 +87,7 @@ export default function App() {
             name="charFour"
             maxLength="1"
             value={charFour}
-            onChange={(e) =>
-              setUserInput({ ...userInput, charFour: e.target.value })
-            }
+            onChange={handleChange}
           />
         </div>
 
