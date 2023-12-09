@@ -34,8 +34,8 @@ export default function App() {
   const { charOne, charTwo, charThree, charFour } = userInput
 
   const verifyCode = () => {
-    const submittedPassCode = `${charOne}${charTwo}${charThree}${charFour}`
-    submittedPassCode === passCode ? setVerified(true) : setVerified(false)
+    const submittedPassCode = Object.values(userInput).join("")
+    setVerified(submittedPassCode === passCode)
   }
 
   const handleChange = (e) => {
